@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cors()); // to be able to call localhost:3000 from another website
 
 app.get("/", (_req, res) => {
-  res.json({ message: "This is the QuickCashApi home link" });
+  res.json({ message: "This is the QuickCashApi Home address" });
 });
 
 app.use("/api/request_payment", require("./routes/requestPayment"));
