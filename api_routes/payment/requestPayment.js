@@ -3,8 +3,7 @@ const router = express.Router();
 const ValidBusiness = require("../../schemas/ValidBusiness");
 const User = require("../../schemas/User");
 
-
-const isAmountValid = (req, res, next) => {
+let isAmountValid = (req, res, next) => {
   let amountValue = req.body.amount;
   if (typeof amountValue === "number") {
     if (amountValue >= 25 && amountValue <= 300000) {
@@ -19,7 +18,7 @@ const isAmountValid = (req, res, next) => {
   }
 };
 
-const validatePaymentCreation = (req, res, _next) => {
+let validatePaymentCreation = (req, res, _next) => {
   // verify if the ID is valid
   let payeeId = req.body.payeeId;
   if (typeof payeeId === "number") {

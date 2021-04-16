@@ -1,16 +1,3 @@
-/**
- * This is the API for QuickCash SDK to communicate with to validate payments
- * The lifecycle of a Payment is as follow:
- * requestPayment -> createPayment -> otpVerification -> transactionResult
- *
- * When an SDK sends a POST request to /api/request_payment
- * The request is processed to verify if the payeeID is a valid business of
- * QuickCash, then if so, this API responds with a ValidBusiness object, indicating
- * that the transfer is valid.
- *
- * At that point, the SDK should send a CreatePayment object with the user's personnal info.
- * Then the /api/create_payment will validate the info to proceed with OTP authentication.
- */
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
