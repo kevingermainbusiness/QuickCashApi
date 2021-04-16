@@ -1,11 +1,10 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+import { Schema, model } from "mongoose";
 
 /**
  * An object containing request to make a payment
  * from a payer(payerId) to a business (payeeId)
  */
-const CreatePayment = new Schema({
+let CreatePayment = new Schema({
   payeeId: {
     type: Number,
     required: true,
@@ -24,4 +23,4 @@ const CreatePayment = new Schema({
   },
 });
 
-module.exports = mongoose.model("CreatePayment", CreatePayment);
+export default model("CreatePayment", CreatePayment);

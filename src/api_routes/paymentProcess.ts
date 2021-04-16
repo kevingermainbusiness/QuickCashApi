@@ -11,8 +11,8 @@
  * At that point, the SDK should send a CreatePayment object with the user's personnal info.
  * Then the /api/createPayment will validate the info to proceed with OTP authentication.
  */
-const express = require("express");
-const router = express.Router();
+import express, { Router } from "express";
+let router: Router = express.Router();
 
 router.post("/requestPayment", require("./payment/requestPayment"));
 router.post("/createPayment", require("./payment/createPayment"));

@@ -1,7 +1,17 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+import { model, Schema } from "mongoose";
 
-const User = new Schema({
+// interface UserInterface {
+//   uuid: Number;
+//   userPass: String;
+//   areaCode: String;
+//   isBusiness: Boolean;
+//   businessName: String;
+//   isSuspended: Boolean;
+//   dateOfCreation: Date;
+//   balance: Number;
+// }
+
+let User = new Schema({
   uuid: {
     type: Number,
     required: true,
@@ -41,4 +51,4 @@ const User = new Schema({
   },
 });
 
-module.exports = mongoose.model("User", User);
+export default model("User", User);

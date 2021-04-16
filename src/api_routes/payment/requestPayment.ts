@@ -1,9 +1,10 @@
-const express = require("express");
-const router = express.Router();
-const ValidBusiness = require("../../schemas/ValidBusiness");
-const User = require("../../schemas/User");
+import express, { Router, Request, Response, NextFunction } from "express";
+import ValidBusiness from "../../schemas/ValidBusiness";
+import User from "../../schemas/User";
 
-let isAmountValid = (req, res, next) => {
+let router: Router = express.Router();
+
+let isAmountValid = (req: Request, res: Response, next: NextFunction) => {
   let amountValue = req.body.amount;
   if (typeof amountValue === "number") {
     if (amountValue >= 25 && amountValue <= 300000) {
@@ -18,17 +19,21 @@ let isAmountValid = (req, res, next) => {
   }
 };
 
-let validatePaymentRequest = (req, res, _next) => {
+let validatePaymentRequest = (
+  req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
   // verify if the ID is valid
   let payeeId = req.body.payeeId;
   if (typeof payeeId === "number") {
     User.findOne({ uuid: payeeId })
       .exec()
-      .then((user) => {
+      .then((user: any) => {
         // verify is the user has business authority
         if (user.isBusiness) {
           // Now the SDK will send the User to the CreatePayment route
-          let response = ValidBusiness({
+          let response = new ValidBusiness({
             payeeId: user.uuid,
             businessName: user.businessName,
             amount: req.body.amount,
@@ -42,7 +47,7 @@ let validatePaymentRequest = (req, res, _next) => {
           });
         }
       })
-      .catch((err) => {
+      .catch((err: any) => {
         res.json(err);
       });
   } else {
