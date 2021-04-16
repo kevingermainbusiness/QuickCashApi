@@ -30,13 +30,13 @@ const validatePaymentCreation = (req, res, _next) => {
         // verify is the user has business authority
         if (user.isBusiness) {
           // Now the SDK will send the User to the CreatePayment route
-          res.json(
-            ValidBusiness({
-              payeeId: user.uuid,
-              businessName: user.businessName,
-              amount: req.body.amount,
-            })
-          );
+          let response = ValidBusiness({
+            payeeId: user.uuid,
+            businessName: user.businessName,
+            amount: req.body.amount,
+          });
+          res.json(response);
+          console.log(response);
         } else {
           res.json({
             message:
