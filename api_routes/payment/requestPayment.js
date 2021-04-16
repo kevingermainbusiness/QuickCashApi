@@ -1,9 +1,8 @@
 const express = require("express");
-const ValidBusiness = require("../schemas/ValidBusiness");
-
-const User = require("../schemas/User");
-
 const router = express.Router();
+const ValidBusiness = require("../../schemas/ValidBusiness");
+const User = require("../../schemas/User");
+
 
 const isAmountValid = (req, res, next) => {
   let amountValue = req.body.amount;

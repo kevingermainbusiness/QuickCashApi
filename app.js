@@ -15,7 +15,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const User = require("./schemas/User");
 const app = express();
 
 app.use(express.json());
@@ -25,29 +24,8 @@ app.get("/", (_req, res) => {
   res.json({ message: "This is the QuickCashApi Home address" });
 });
 
-app.use("/api/request_payment", require("./routes/requestPayment"));
-app.use("/api/create_payment", require("./routes/createPayment"));
-
-// To create a new User
-app.post("/insertUser", async (req, res) => {
-  const user = new User({
-    uuid: req.body.uuid,
-    userPass: req.body.userPass,
-    areaCode: req.body.areaCode,
-    isBusiness: req.body.isBusiness,
-    businessName: req.body.businessName,
-    isSuspended: req.body.isSuspended,
-    dateOfCreation: new Date(),
-    balance: req.body.balance,
-  });
-
-  try {
-    const newUser = await user.save();
-    res.json(newUser);
-  } catch (error) {
-    res.json({ message: error });
-  }
-});
+app.use("/api/internal_actions", require("./api_routes/internalActions")); // insert, delete user
+app.use("/api/payment_process", require("./api_routes/paymentProcess")); // make payment
 
 app.listen(3000);
 
