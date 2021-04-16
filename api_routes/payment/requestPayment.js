@@ -18,7 +18,7 @@ let isAmountValid = (req, res, next) => {
   }
 };
 
-let validatePaymentCreation = (req, res, _next) => {
+let validatePaymentRequest = (req, res, _next) => {
   // verify if the ID is valid
   let payeeId = req.body.payeeId;
   if (typeof payeeId === "number") {
@@ -50,6 +50,6 @@ let validatePaymentCreation = (req, res, _next) => {
   }
 };
 
-router.post("/", isAmountValid, validatePaymentCreation);
+router.post("/", isAmountValid, validatePaymentRequest);
 
 module.exports = router;
